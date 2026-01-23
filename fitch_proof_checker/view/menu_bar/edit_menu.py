@@ -9,6 +9,8 @@ def setup(fpe_main_window):
         ("Cut", "cut", "Ctrl+x"),
         ("Copy", "copy", "Ctrl+c"),
         ("Paste", "paste", "Ctrl+v"),
+        ("Clear", "clear", ""),
+        ("Select All", "selectAll", ""),
     ]
     for name, fun_name, shortcut in action_data:
         add_action(fpe_main_window, edit_menu, '&' + name, edit_action(fun_name), shortcut)
