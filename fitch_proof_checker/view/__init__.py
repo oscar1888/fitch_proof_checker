@@ -1,0 +1,1 @@
+from .fitch_proof_checker import FitchProofChecker
