@@ -1,9 +1,11 @@
+import subprocess
+import sys
 from PyQt6.QtWidgets import QFileDialog
 from fitch_proof_checker.view.utils import add_action
 
 
 def setup(fpe_main_window):
-    file_menu = fpe_main_window.menuBar().addMenu("&File")
+    file_menu = fpe_main_window.menuBar().addMenu("File")
     action_data = [
         ("New Window", open_new_window, "Ctrl+n"),
         ("Open", open_proof_file, "Ctrl+o"),
@@ -12,15 +14,11 @@ def setup(fpe_main_window):
         ("Quit", quit_program, "Ctrl+q"),
     ]
     for name, fun, shortcut in action_data:
-        add_action(fpe_main_window, file_menu, '&' + name, fun, shortcut)
+        add_action(fpe_main_window, file_menu, name, fun, shortcut)
 
 
-def open_new_window(fpe_main_window):
-    w = type(fpe_main_window)()
-    offset = 25 * (len(fpe_main_window.windows) + 1)
-    w.move(fpe_main_window.x() + offset, fpe_main_window.y() + offset)
-    fpe_main_window.windows.append(w)
-    w.show()
+def open_new_window(_):
+    subprocess.Popen([sys.executable] + sys.argv)
 
 
 def open_proof_file(fpe_main_window):
