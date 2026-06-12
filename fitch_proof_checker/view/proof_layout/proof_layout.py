@@ -1,11 +1,15 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QScrollArea, QWidget, QVBoxLayout, QApplication
+from PyQt6.QtGui import QFont
+from PyQt6.QtWidgets import QScrollArea, QWidget, QVBoxLayout, QApplication, QHBoxLayout, QLabel, QLineEdit
 
-from fitch_proof_checker.view.proof_layout.fpe_line_edit import FPELineEdit
+from fitch_proof_checker.view.fpe_line_edit.fpe_line_edit import FPELineEdit
 from fitch_proof_checker.view.proof_layout.proof_line_view import ProofLine
 
 
 def setup_proof_layout(fpe_main_window):
+    proof_title = QLabel("Proof:")
+    proof_title.setStyleSheet("font-weight: bold; color: #333;")
+    fpe_main_window.global_layout.addWidget(proof_title)
     scroll = QScrollArea()
     scroll.setWidgetResizable(True)
     container = QWidget()
@@ -15,6 +19,16 @@ def setup_proof_layout(fpe_main_window):
     scroll.setWidget(container)
     fpe_main_window.global_layout.addWidget(scroll)
     add_premise(fpe_main_window)
+    goal_layout = QHBoxLayout()
+    goal_label = QLabel("Goal:")
+    goal_label.setStyleSheet("font-weight: bold;")
+    fpe_main_window.goal_field = QLineEdit()
+    font = QFont("Cambria Math", 12)
+    font.setItalic(True)
+    fpe_main_window.goal_field.setFont(font)
+    goal_layout.addWidget(goal_label)
+    goal_layout.addWidget(fpe_main_window.goal_field)
+    fpe_main_window.global_layout.addLayout(goal_layout)
 
 
 def _get_all_lines(fpe_main_window):
@@ -51,6 +65,7 @@ def add_premise(fpe_main_window):
     row = ProofLine(fpe_main_window, is_assump=True)
     fpe_main_window.proof_layout.insertWidget(idx, row)
     row.formula_field.setFocus()
+    if premises: fpe_main_window.edited = True
     update_layout(fpe_main_window)
 
 
@@ -66,6 +81,7 @@ def add_step_after(fpe_main_window):
     row = ProofLine(fpe_main_window, depth=current_line.depth)
     fpe_main_window.proof_layout.insertWidget(idx, row)
     row.formula_field.setFocus()
+    fpe_main_window.edited = True
     update_layout(fpe_main_window)
 
 
@@ -85,6 +101,7 @@ def add_step_before(fpe_main_window):
                     )
     fpe_main_window.proof_layout.insertWidget(idx, row)
     row.formula_field.setFocus()
+    fpe_main_window.edited = True
     update_layout(fpe_main_window)
 
 
@@ -142,6 +159,7 @@ def new_subproof(fpe_main_window):
     row = ProofLine(fpe_main_window, is_assump=True, depth=depth)
     fpe_main_window.proof_layout.insertWidget(idx, row)
     row.formula_field.setFocus()
+    fpe_main_window.edited = True
     update_layout(fpe_main_window)
 
 
@@ -178,8 +196,7 @@ def end_subproof(fpe_main_window):
 
 
 def edit_goal(fpe_main_window):
-    # TODO: implement this function
-    pass
+    fpe_main_window.goal_field.setFocus()
 
 
 def verify_line(fpe_main_window):
