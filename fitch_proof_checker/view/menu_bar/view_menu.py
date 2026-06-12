@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QApplication
-from fitch_proof_checker.view.style import MIN_SIZE, BASE_SIZE, MAX_SIZE, BASE_QLE_SIZE
+from fitch_proof_checker.view.utils.style import MIN_SIZE, BASE_SIZE, MAX_SIZE, BASE_QLE_SIZE
 from fitch_proof_checker.view.utils import add_action
 
 
