@@ -1,6 +1,6 @@
 import subprocess
 import sys
-from PyQt6.QtWidgets import QFileDialog
+from PyQt6.QtWidgets import QFileDialog, QMessageBox
 from fitch_proof_checker.view.utils import add_action
 
 
@@ -39,6 +39,21 @@ def save_as(fpe_main_window):
     pass
 
 
+def _can_quit(fpe_main_window):
+    if fpe_main_window.edited:  # TODO: replace condition with "if not saved and edited or saved and saved serialization != actual serialization"
+        res = QMessageBox.warning(
+            fpe_main_window,
+            "Warning",
+            "Changes will not be saved. Are you sure?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No
+        )
+
+        return res == QMessageBox.StandardButton.Yes
+
+    return True
+
+
 def quit_program(fpe_main_window):
-    # TODO: implement "Changes will not be saved. Are you sure?" dialog in case of nonempty proof
-    fpe_main_window.close()
+    if _can_quit(fpe_main_window):
+        fpe_main_window.close()

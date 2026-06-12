@@ -2,7 +2,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPainter, QPen
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel
 
-from fitch_proof_checker.view.proof_layout.fpe_line_edit import FPELineEdit
+from fitch_proof_checker.view.fpe_line_edit.fpe_line_edit import FPELineEdit
 
 
 class ProofLine(QWidget):
