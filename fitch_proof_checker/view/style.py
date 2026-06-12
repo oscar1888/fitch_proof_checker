@@ -12,10 +12,6 @@ def apply(fpe_main_window):
         border-bottom: 1px solid #ccc;
         background: transparent;
         padding: 6px 0;
-    }
-    
-    QLineEdit:focus {
-        border-bottom: 2px solid #0078d7;
-        background-color: #f0f8ff;
+        margin-bottom: 2px;
     }
     """)
