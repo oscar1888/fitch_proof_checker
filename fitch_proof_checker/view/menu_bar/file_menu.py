@@ -39,7 +39,7 @@ def save_as(fpe_main_window):
     pass
 
 
-def _can_quit(fpe_main_window):
+def can_quit(fpe_main_window):
     if fpe_main_window.edited:  # TODO: replace condition with "if not saved and edited or saved and saved serialization != actual serialization"
         res = QMessageBox.warning(
             fpe_main_window,
@@ -55,5 +55,4 @@ def _can_quit(fpe_main_window):
 
 
 def quit_program(fpe_main_window):
-    if _can_quit(fpe_main_window):
-        fpe_main_window.close()
+    fpe_main_window.close()

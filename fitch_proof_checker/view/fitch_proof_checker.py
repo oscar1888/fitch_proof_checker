@@ -33,7 +33,7 @@ class FitchProofChecker(QMainWindow):
         setup_msg_box(self)
 
     def closeEvent(self, event):
-        if _can_quit(self):
+        if can_quit(self):
             event.accept()
         else:
             event.ignore()
