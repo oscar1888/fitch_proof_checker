@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QHBoxLayout, QPushButton, QFrame
+from PyQt6.QtWidgets import QHBoxLayout, QPushButton
 
 
 def setup_check_buttons(fpe_main_window):
@@ -15,8 +15,3 @@ def setup_check_buttons(fpe_main_window):
     top_bar_layout.addWidget(fpe_main_window.btn_check_proof)
     top_bar_layout.addStretch()
     fpe_main_window.global_layout.addLayout(top_bar_layout)
-    separator = QFrame()
-    separator.setFrameShape(QFrame.Shape.HLine)
-    separator.setFrameShadow(QFrame.Shadow.Sunken)
-    separator.setStyleSheet("color: #cccccc;")
-    fpe_main_window.global_layout.addWidget(separator)

@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QHBoxLayout, QLabel, QFrame
+from PyQt6.QtWidgets import QHBoxLayout, QLabel
 
 
 def setup_logic_description(fpe_main_window):
@@ -14,9 +14,3 @@ def setup_logic_description(fpe_main_window):
     logic_layout.addStretch()
 
     fpe_main_window.global_layout.addLayout(logic_layout)
-
-    separator = QFrame()
-    separator.setFrameShape(QFrame.Shape.HLine)
-    separator.setFrameShadow(QFrame.Shadow.Sunken)
-    separator.setStyleSheet("color: #cccccc;")
-    fpe_main_window.global_layout.addWidget(separator)
