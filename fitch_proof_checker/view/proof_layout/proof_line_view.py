@@ -3,6 +3,11 @@ from PyQt6.QtGui import QPainter, QPen
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel
 
 from fitch_proof_checker.view.fpe_line_edit.fpe_line_edit import FPELineEdit
+from fitch_proof_checker.view.utils.misc import create_status_dot
+
+OFFSET_FROM_NUM = 10
+INTERBAR_SPACE = 14
+TEXT_PADDING = 10
 
 
 class ProofLine(QWidget):
@@ -13,10 +18,6 @@ class ProofLine(QWidget):
         self.arb_consts_introduced = []
         self.depth = depth
 
-        self.OFFSET_FROM_NUM = 10
-        self.INTERBAR_SPACE = 14
-        self.TEXT_PADDING = 10
-
         line_layout = QHBoxLayout(self)
         line_layout.setContentsMargins(10, 5, 10, 5)
         line_layout.setSpacing(5)
@@ -25,7 +26,7 @@ class ProofLine(QWidget):
         self.line_number_label.setFixedWidth(25)
         line_layout.addWidget(self.line_number_label)
 
-        bars_space = self.OFFSET_FROM_NUM + (max(0, self.depth) * self.INTERBAR_SPACE) + self.TEXT_PADDING
+        bars_space = OFFSET_FROM_NUM + self.depth * INTERBAR_SPACE + TEXT_PADDING
         line_layout.addSpacing(bars_space)
 
         self.formula_field = FPELineEdit(self, self.fpe_main_window)
@@ -43,11 +44,11 @@ class ProofLine(QWidget):
         painter = QPainter(self)
         painter.setPen(QPen(Qt.GlobalColor.black, 2, cap=Qt.PenCapStyle.SquareCap))
 
-        start_x = self.line_number_label.geometry().right() + self.OFFSET_FROM_NUM
+        start_x = self.line_number_label.geometry().right() + OFFSET_FROM_NUM
         last_x = start_x
 
         for i in range(self.depth + 1):
-            last_x = start_x + (i * self.INTERBAR_SPACE)
+            last_x = start_x + (i * INTERBAR_SPACE)
             painter.drawLine(last_x, 15 if self.is_assump and i > 0 and i == self.depth else 0, last_x, self.height())
 
         glob_prem = _get_premises(self.fpe_main_window)
