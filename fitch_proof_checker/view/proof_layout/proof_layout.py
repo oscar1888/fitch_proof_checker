@@ -1,9 +1,11 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QScrollArea, QWidget, QVBoxLayout, QApplication, QHBoxLayout, QLabel, QLineEdit
+from PyQt6.QtWidgets import QScrollArea, QWidget, QVBoxLayout, QApplication, QHBoxLayout, QLabel, QLineEdit, \
+    QInputDialog, QMessageBox
 
 from fitch_proof_checker.view.fpe_line_edit.fpe_line_edit import FPELineEdit
 from fitch_proof_checker.view.proof_layout.proof_line_view import ProofLine
+from fitch_proof_checker.view.utils.misc import create_status_dot
+from fitch_proof_checker.view.utils.style import qle_font, ARB_CONST_LABEL_STYLE
 
 
 def setup_proof_layout(fpe_main_window):
@@ -35,6 +37,10 @@ def _create_goal_area(fpe_main_window):
     fpe_main_window.goal_field.setFont(qle_font)
     goal_layout.addWidget(goal_label)
     goal_layout.addWidget(fpe_main_window.goal_field)
+
+    fpe_main_window.goal_status_dot = create_status_dot()
+    goal_layout.addWidget(fpe_main_window.goal_status_dot)
+
     fpe_main_window.global_layout.addLayout(goal_layout)
 
 
@@ -63,7 +69,6 @@ def _redraw_lines(fpe_main_window):
 def update_layout(fpe_main_window):
     _enumerate_proof_lines(fpe_main_window)
     _redraw_lines(fpe_main_window)
-    _enumerate_proof_lines(fpe_main_window)
 
 
 def add_premise(fpe_main_window):

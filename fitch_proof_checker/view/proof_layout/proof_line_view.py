@@ -38,6 +38,9 @@ class ProofLine(QWidget):
             self.justification_field = FPELineEdit(self, self.fpe_main_window)
             line_layout.addWidget(self.justification_field, stretch=4)
 
+            self.status_dot = create_status_dot()
+            line_layout.addWidget(self.status_dot)
+
     def paintEvent(self, event):
         from fitch_proof_checker.view.proof_layout.proof_layout import _get_premises
 
