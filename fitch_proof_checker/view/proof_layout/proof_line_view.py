@@ -10,6 +10,7 @@ class ProofLine(QWidget):
         super().__init__()
         self.fpe_main_window = fpe_main_window
         self.is_assump = is_assump
+        self.arb_consts_introduced = []
         self.depth = depth
 
         self.OFFSET_FROM_NUM = 10

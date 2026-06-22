@@ -195,6 +195,64 @@ def end_subproof(fpe_main_window):
     update_layout(fpe_main_window)
 
 
+def new_arbitary_constant(fpe_main_window):
+    if not isinstance(QApplication.instance().focusWidget(), FPELineEdit):
+        return
+    proof_line = QApplication.instance().focusWidget().proof_line
+    if not proof_line.is_assump or proof_line.depth == 0: return
+
+    const_name, ok = QInputDialog.getText(
+        fpe_main_window,
+        "New arbitrary constant",
+        "Write the constant name (e.g. \"a\"):"
+    )
+
+    if ok and const_name.strip():
+        const_name = const_name.strip()
+
+        if const_name in proof_line.arb_consts_introduced:
+            QMessageBox.warning(
+                fpe_main_window,
+                "Duplicated constant",
+                f"The constant '{const_name}' was already introduced in this line."
+            )
+            return
+
+        proof_line.arb_consts_introduced.append(const_name)
+
+        if not hasattr(proof_line, 'arb_const_label'):
+            proof_line.arb_const_label = QLabel()
+            proof_line.arb_const_label.setStyleSheet(ARB_CONST_LABEL_STYLE)
+            proof_line.layout().insertWidget(2, proof_line.arb_const_label)
+
+        proof_line.arb_const_label.setText(" ".join(proof_line.arb_consts_introduced))
+
+
+def delete_arbitrary_constant(fpe_main_window):
+    if not isinstance(QApplication.instance().focusWidget(), FPELineEdit):
+        return
+    proof_line = QApplication.instance().focusWidget().proof_line
+    if not proof_line.is_assump or proof_line.depth == 0 or not proof_line.arb_consts_introduced: return
+
+    item, ok = QInputDialog.getItem(
+        fpe_main_window,
+        "Delete arbitrary constant",
+        "Select the constant to remove:",
+        proof_line.arb_consts_introduced,
+        0,
+        False
+    )
+
+    if ok and item:
+        proof_line.arb_consts_introduced.remove(item)
+
+        if not proof_line.arb_consts_introduced:
+            proof_line.arb_const_label.deleteLater()
+            del proof_line.arb_const_label
+        else:
+            proof_line.arb_const_label.setText(" ".join(proof_line.arb_consts_introduced))
+
+
 def edit_goal(fpe_main_window):
     fpe_main_window.goal_field.setFocus()
 
