@@ -1,8 +1,6 @@
 from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
 
-from fitch_proof_checker.model.grammar_manager.grammar_manager import GrammarManager
 from fitch_proof_checker.view.menu_bar.file_menu import can_quit
-from fitch_proof_checker.model.logic_manager.logic_manager import LogicManager
 from fitch_proof_checker.view.utils import style
 from fitch_proof_checker.view.check_buttons import setup_check_buttons
 from fitch_proof_checker.view.logic_description import setup_logic_description
@@ -13,14 +11,14 @@ from fitch_proof_checker.view.utils.misc import add_separator
 
 
 class FitchProofChecker(QMainWindow):
-    def __init__(self, model):
+    def __init__(self, model, grammar_manager, logic_manager):
         super().__init__()
 
         self.model = model
 
         self.zoom_level = 0
-        self.grammar_manager = GrammarManager()
-        self.logic_manager = LogicManager()
+        self.grammar_manager = grammar_manager
+        self.logic_manager = logic_manager
         self.edited = False
         self.setWindowTitle("Fitch Proof Checker")
         self.resize(600, 800)
