@@ -3,9 +3,10 @@ from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLis
 
 
 class GrammarManagerDialog(QDialog):
-    def __init__(self, grammar_manager, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.grammar_manager = grammar_manager
+        parent.gmd = self
+        self.presenter = None
         self.setWindowTitle("Grammar Manager")
         self.setMinimumSize(500, 450)
 
@@ -35,7 +36,6 @@ class GrammarManagerDialog(QDialog):
         self.combo_defaults.addItems([
             "Propositional Logic (PL)",
             "First-Order Logic (FOL)",
-            "Modal Logic"
         ])
         self.combo_defaults.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
 
@@ -48,10 +48,8 @@ class GrammarManagerDialog(QDialog):
 
         profile_layout = QHBoxLayout()
         self.btn_load_profile = QPushButton("Load Grammar Profile...")
-        self.btn_load_profile.setStyleSheet("background-color: #e8f5e9;")
 
         self.btn_save_profile = QPushButton("Save Grammar Profile As...")
-        self.btn_save_profile.setStyleSheet("background-color: #e8f5e9;")
 
         self.btn_load_profile.clicked.connect(self._load_profile)
         self.btn_save_profile.clicked.connect(self._save_profile)
@@ -65,15 +63,22 @@ class GrammarManagerDialog(QDialog):
 
         main_layout.addLayout(bottom_layout)
 
+    def add_presenter(self, presenter):
+        self.presenter = presenter
+        self.presenter.populate_list('connective')
+        self.presenter.populate_list('quantifier')
+
     def _setup_connectives_tab(self):
         layout = QHBoxLayout(self.tab_connectives)
 
         self.list_connectives = QListWidget()
-        self._populate_list('connectives')
 
         btn_layout = QVBoxLayout()
         btn_add = QPushButton("Add Connective...")
         btn_remove = QPushButton("Remove Connective")
+
+        self.btn_add_conn = btn_add
+        self.btn_remove_conn = btn_remove
 
         btn_add.clicked.connect(lambda: self._add_item('connective'))
         btn_remove.clicked.connect(lambda: self._remove_item('connective'))
@@ -89,11 +94,13 @@ class GrammarManagerDialog(QDialog):
         layout = QHBoxLayout(self.tab_quantifiers)
 
         self.list_quantifiers = QListWidget()
-        self._populate_list('quantifiers')
 
         btn_layout = QVBoxLayout()
         btn_add = QPushButton("Add Quantifier...")
         btn_remove = QPushButton("Remove Quantifier")
+
+        self.btn_add_quant = btn_add
+        self.btn_remove_quant = btn_remove
 
         btn_add.clicked.connect(lambda: self._add_item('quantifier'))
         btn_remove.clicked.connect(lambda: self._remove_item('quantifier'))
@@ -105,42 +112,40 @@ class GrammarManagerDialog(QDialog):
         layout.addWidget(self.list_quantifiers, stretch=2)
         layout.addLayout(btn_layout, stretch=1)
 
-    def _populate_list(self, item_type):
-        if item_type == 'connectives':
-            self.list_connectives.clear()
-            for conn in getattr(self.grammar_manager, 'connectives', []):
-                self.list_connectives.addItem(f"{conn.name} ({conn.symbol})")
-        else:
-            self.list_quantifiers.clear()
-            for quant in getattr(self.grammar_manager, 'quantifiers', []):
-                self.list_quantifiers.addItem(f"{quant.name} ({quant.symbol})")
-
     def _remove_item(self, item_type):
         list_widget = self.list_connectives if item_type == 'connective' else self.list_quantifiers
-        target_list = self.grammar_manager.connectives if item_type == 'connective' else self.grammar_manager.quantifiers
-
         selected_items = list_widget.selectedItems()
+
         if not selected_items:
-            QMessageBox.warning(self, "Warning", f"Select a {item_type} to remove.")
+            clean_type = item_type.replace('_', ' ')
+            QMessageBox.warning(self, "Warning", f"Select a {clean_type} to remove.")
             return
 
         row = list_widget.row(selected_items[0])
-        item_to_remove = target_list[row]
+        item_name = self.presenter.get_item_name(item_type, row)
+
+        if self.presenter.is_protected_item(item_type, row):
+            QMessageBox.warning(
+                self,
+                "Action Denied",
+                f"Cannot remove '{item_name}' because it is a core First-Order Logic component."
+            )
+            return
 
         reply = QMessageBox.question(
             self, "Confirm deletion",
-            f"Are you sure you want to remove '{item_to_remove.name}'?",
+            f"Are you sure you want to remove '{item_name}'?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
         if reply == QMessageBox.StandardButton.Yes:
-            target_list.pop(row)
-            self._populate_list(item_type + 's')
+            self.presenter.remove_item(item_type, row)
 
     def _add_item(self, item_type):
+        clean_type = item_type.capitalize()
         file_path, _ = QFileDialog.getOpenFileName(
             self,
-            f"Select Python {item_type.capitalize()} Plugin",
+            f"Select Python {clean_type} Plugin",
             "",
             "Python Files (*.py)"
         )
@@ -148,30 +153,12 @@ class GrammarManagerDialog(QDialog):
         if not file_path:
             return
 
-        try:
-            module_name = os.path.basename(file_path).replace('.py', '')
-            spec = importlib.util.spec_from_file_location(module_name, file_path)
-            custom_module = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(custom_module)
+        success, message = self.presenter.add_item(item_type, file_path)
 
-            expected_class = 'CustomConnective' if item_type == 'connective' else 'CustomQuantifier'
-
-            if not hasattr(custom_module, expected_class):
-                raise ValueError(f"The file must contain a class named '{expected_class}'.")
-
-            new_item = getattr(custom_module, expected_class)()
-
-            if item_type == 'connective':
-                self.grammar_manager.connectives.append(new_item)
-                self._populate_list('connectives')
-            else:
-                self.grammar_manager.quantifiers.append(new_item)
-                self._populate_list('quantifiers')
-
-            QMessageBox.information(self, "Success", f"{item_type.capitalize()} '{new_item.name}' loaded!")
-
-        except Exception as e:
-            QMessageBox.critical(self, "Plugin Error", f"Failed to load {item_type}:\n\n{str(e)}")
+        if success:
+            QMessageBox.information(self, "Success", message)
+        else:
+            QMessageBox.critical(self, "Plugin Error", message)
 
     def _load_default_grammar(self):
         selected = self.combo_defaults.currentText()
@@ -182,26 +169,32 @@ class GrammarManagerDialog(QDialog):
         )
 
         if reply == QMessageBox.StandardButton.Yes:
-            # TODO: Chiama il manager per caricare l'alfabeto hardcoded
-            # self.grammar_manager.load_preset(selected)
-
-            self._populate_list('connectives')
-            self._populate_list('quantifiers')
-
+            self.presenter.load_default_grammar(selected)
             QMessageBox.information(self, "Success", f"Loaded preset: {selected}")
 
     def _load_profile(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, "Load Grammar Profile", "",
-                                                   "JSON Files (*.json);;All Files (*)")
-        if file_name:
-            # TODO: self.grammar_manager.load_vocabulary_from_json(file_name)
-            QMessageBox.information(self, "Mock", "Grammar Profile loaded.")
-            self._populate_list('connectives')
-            self._populate_list('quantifiers')
+        file_path, _ = QFileDialog.getOpenFileName(
+            self, "Load Grammar Profile", "",
+            "JSON Files (*.json);;All Files (*)"
+        )
+        if file_path:
+            success, message = self.presenter.load_profile(file_path)
+            if success:
+                QMessageBox.information(self, "Success", message)
+            else:
+                QMessageBox.critical(self, "Error", message)
 
     def _save_profile(self):
-        file_name, _ = QFileDialog.getSaveFileName(self, "Save Grammar Profile As...", "",
-                                                   "JSON Files (*.json);;All Files (*)")
-        if file_name:
-            # TODO: self.grammar_manager.save_vocabulary_to_json(file_name)
-            QMessageBox.information(self, "Mock", "Grammar Profile saved.")
+        file_path, _ = QFileDialog.getSaveFileName(
+            self, "Save Grammar Profile As...", "",
+            "JSON Files (*.json);;All Files (*)"
+        )
+        if file_path:
+            if not file_path.endswith('.json'):
+                file_path += '.json'
+
+            success, message = self.presenter.save_profile(file_path)
+            if success:
+                QMessageBox.information(self, "Success", message)
+            else:
+                QMessageBox.critical(self, "Error", message)
