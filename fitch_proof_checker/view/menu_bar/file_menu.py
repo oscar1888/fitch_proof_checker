@@ -1,3 +1,4 @@
+import json
 import subprocess
 import sys
 from PyQt6.QtWidgets import QFileDialog, QMessageBox

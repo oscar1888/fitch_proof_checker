@@ -1,6 +1,5 @@
-from fitch_proof_checker.view.proof_layout.proof_layout import add_premise, add_step_after, add_step_before, \
-    delete_step, new_subproof, end_subproof, edit_goal, verify_line, verify_proof, new_arbitary_constant, \
-    delete_arbitrary_constant
+from fitch_proof_checker.view.proof_layout import add_premise, add_step_after, add_step_before, delete_step, \
+    new_subproof, end_subproof, edit_goal, new_arbitary_constant, delete_arbitrary_constant
 from fitch_proof_checker.view.utils import add_action
 
 

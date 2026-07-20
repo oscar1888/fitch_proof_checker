@@ -1,9 +1,8 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPainter, QPen
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QLabel
-
-from fitch_proof_checker.view.fpe_line_edit.fpe_line_edit import FPELineEdit
-from fitch_proof_checker.view.utils.misc import create_status_dot
+from fitch_proof_checker.view.fpe_line_edit import FPELineEdit
+from fitch_proof_checker.view.utils import create_status_dot
 
 OFFSET_FROM_NUM = 10
 INTERBAR_SPACE = 14

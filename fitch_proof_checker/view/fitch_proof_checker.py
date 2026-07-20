@@ -1,13 +1,12 @@
 from PyQt6.QtWidgets import QMainWindow, QWidget, QVBoxLayout
-
 from fitch_proof_checker.view.menu_bar.file_menu import can_quit
 from fitch_proof_checker.view.utils import style
 from fitch_proof_checker.view.check_buttons import setup_check_buttons
 from fitch_proof_checker.view.logic_description import setup_logic_description
 from fitch_proof_checker.view.msg_box import setup_msg_box
-from fitch_proof_checker.view.proof_layout.proof_layout import setup_proof_layout
-from fitch_proof_checker.view.menu_bar.menu_bar import setup_menu_bar
-from fitch_proof_checker.view.utils.misc import add_separator
+from fitch_proof_checker.view.proof_layout import setup_proof_layout
+from fitch_proof_checker.view.menu_bar import setup_menu_bar
+from fitch_proof_checker.view.utils import add_separator
 
 
 class FitchProofChecker(QMainWindow):

@@ -1,6 +1,3 @@
-from fitch_proof_checker.view.grammar_manager_dialog import \
-    GrammarManagerDialog
-from fitch_proof_checker.view.logic_manager_dialog import LogicManagerDialog
 from fitch_proof_checker.view.utils import add_action
 
 

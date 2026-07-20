@@ -1,7 +1,6 @@
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import QLineEdit
-
-from fitch_proof_checker.view.utils.style import qle_font
+from fitch_proof_checker.view.utils import qle_font
 
 
 class FPELineEdit(QLineEdit):

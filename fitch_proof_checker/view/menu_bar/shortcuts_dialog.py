@@ -1,5 +1,4 @@
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QGridLayout, QLabel,
-                             QWidget, QHBoxLayout)
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QGridLayout, QLabel, QWidget, QHBoxLayout
 from PyQt6.QtCore import Qt
 from fitch_proof_checker.view.fpe_line_edit.utils import symbol_map
 

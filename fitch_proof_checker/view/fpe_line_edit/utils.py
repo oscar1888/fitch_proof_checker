@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QApplication
-from fitch_proof_checker.view.fpe_line_edit.fpe_line_edit import FPELineEdit
-from fitch_proof_checker.view.proof_layout.proof_layout import add_step_after, end_subproof, get_all_lines
+from fitch_proof_checker.view.fpe_line_edit import FPELineEdit
+from fitch_proof_checker.view.proof_layout import add_step_after, end_subproof, get_all_lines
 
 
 def move(movement):

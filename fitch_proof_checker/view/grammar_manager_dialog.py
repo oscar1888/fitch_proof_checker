@@ -1,9 +1,5 @@
-import os
-import importlib.util
-
-from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QPushButton,
-                             QListWidget, QMessageBox, QTabWidget, QWidget,
-                             QFileDialog, QComboBox, QLabel, QSizePolicy)
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QListWidget, QMessageBox, QTabWidget, \
+                            QWidget, QFileDialog, QComboBox, QLabel, QSizePolicy
 
 
 class GrammarManagerDialog(QDialog):

@@ -1,11 +1,9 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QScrollArea, QWidget, QVBoxLayout, QApplication, QHBoxLayout, QLabel, QLineEdit, \
     QInputDialog, QMessageBox
-
-from fitch_proof_checker.view.fpe_line_edit.fpe_line_edit import FPELineEdit
+from fitch_proof_checker.view.fpe_line_edit import FPELineEdit
 from fitch_proof_checker.view.proof_layout.proof_line_view import ProofLine
-from fitch_proof_checker.view.utils.misc import create_status_dot
-from fitch_proof_checker.view.utils.style import qle_font, ARB_CONST_LABEL_STYLE
+from fitch_proof_checker.view.utils import create_status_dot, qle_font, ARB_CONST_LABEL_STYLE
 
 
 def setup_proof_layout(fpe_main_window):
