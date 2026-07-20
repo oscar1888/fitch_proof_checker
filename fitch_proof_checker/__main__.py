@@ -8,9 +8,15 @@ from fitch_proof_checker.view import FitchProofChecker, GrammarManagerDialog, Lo
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(generate_app_icon())
+    window = FitchProofChecker()
+    gmd = GrammarManagerDialog(window)
+    lmd = LogicManagerDialog(window)
+
     model = Model()
-    grammar_manager = GrammarManager()
-    logic_manager = LogicManager()
-    window = FitchProofChecker(model, grammar_manager, logic_manager)
+
+    InputProofPresenter(window, model)
+    GMPresenter(gmd, model)
+    LMPresenter(lmd, model)
+
     window.show()
     sys.exit(app.exec())
