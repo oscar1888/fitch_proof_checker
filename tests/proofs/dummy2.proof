@@ -1,0 +1,49 @@
+{
+    "goal": "Q(a)",
+    "lines": [
+        {
+            "formula": "\u2200x (P(x) \u2192 Q(x))",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P(a)",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P(a) \u2192 Q(a)",
+            "justification": "\u2200Elim 1",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "Q(a)",
+            "justification": "\u2192Elim 2, 3",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P(a)",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": [
+                "a"
+            ]
+        },
+        {
+            "formula": "Q(a)",
+            "justification": "",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        }
+    ]
+}

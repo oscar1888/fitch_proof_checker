@@ -1,0 +1,33 @@
+{
+    "goal": "",
+    "lines": [
+        {
+            "formula": "A",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acB",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\\XOR(A, B)",
+            "justification": "XorIntro 1, 2",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acB",
+            "justification": "XorElim 3, 1",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        }
+    ]
+}

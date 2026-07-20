@@ -1,0 +1,326 @@
+{
+    "goal": "P",
+    "lines": [
+        {
+            "formula": "\u2200x P(x) \u2227 R",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2203y Q(y)",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00ac\u00acQ",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "a = b",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2200x P(x) \u2227 R \u2227 \u2203y Q(y)",
+            "justification": "\u2227Intro 1, 2",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "R",
+            "justification": "\u2227Elim 6",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "R \u2228 S",
+            "justification": "\u2228Intro 7",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "R",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": "Reit 3",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "S",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": "Reit 3",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": "\u2228Elim 8, 9-10, 11-12",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acP",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u22a5",
+            "justification": "\u22a5Intro 3, 14",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": "\u00acIntro 14-15",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "Q",
+            "justification": "\u00acElim 4",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acP",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u22a5",
+            "justification": "\u22a5Intro 3, 18",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acP",
+            "justification": "\u22a5Elim 19",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "Q",
+            "justification": "Reit 17",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P \u2192 Q",
+            "justification": "\u2192Intro 21-22",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "Q",
+            "justification": "\u2192Elim 23, 16",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "Q",
+            "justification": "Reit 17",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "Q",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": "Reit 16",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P \u2194 Q",
+            "justification": "\u2194Intro 25-26, 27-28",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "Q",
+            "justification": "\u2194Elim 29, 16",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": "\u2194Elim 29, 17",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "a = a",
+            "justification": "=Intro",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2200x P(x)",
+            "justification": "\u2227Elim 1",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P(a)",
+            "justification": "\u2200Elim 33",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P(b)",
+            "justification": "=Elim 34, 5",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P(d)",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": [
+                "d"
+            ]
+        },
+        {
+            "formula": "P(d)",
+            "justification": "Reit 36",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2200x (P(x) \u2192 P(x))",
+            "justification": "\u2200Intro 36-37",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": [
+                "d"
+            ]
+        },
+        {
+            "formula": "P",
+            "justification": "Reit 31",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2200x P",
+            "justification": "\u2200Intro 39-40",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2203x P(x)",
+            "justification": "\u2203Intro 34",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P(m)",
+            "justification": null,
+            "depth": 1,
+            "is_assump": true,
+            "arb_consts_introduced": [
+                "m"
+            ]
+        },
+        {
+            "formula": "P",
+            "justification": "Reit 31",
+            "depth": 1,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "P",
+            "justification": "\u2203Elim 42, 43-44",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        }
+    ]
+}

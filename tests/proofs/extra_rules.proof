@@ -1,0 +1,138 @@
+{
+    "goal": "",
+    "lines": [
+        {
+            "formula": "\u00ac(A \u2227 B)",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00ac\u2200x P(x)",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2203y P(y)",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "A \u2192 B",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acB",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "A \u2228 B",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "B \u2192 C",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "D",
+            "justification": null,
+            "depth": 0,
+            "is_assump": true,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acA \u2228 \u00acB",
+            "justification": "DeMorgan 1",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2203x \u00acP(x)",
+            "justification": "QuantEx 2",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u2203x P(x)",
+            "justification": "RenameVar 3",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acB \u2192 \u00acA",
+            "justification": "Contrap 4",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acA",
+            "justification": "ModusTollens 4, 5",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "A",
+            "justification": "DisjunSill 6, 5",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "A \u2192 C",
+            "justification": "HypSill 4, 7",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acA \u2228 B",
+            "justification": "MatImpl 4",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acB \u2228 \u00acB",
+            "justification": "IdempOr 5",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "\u00acB \u2227 \u00acB",
+            "justification": "IdempAnd 5",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        },
+        {
+            "formula": "D \u2228 \u00acD",
+            "justification": "ExclMid",
+            "depth": 0,
+            "is_assump": false,
+            "arb_consts_introduced": []
+        }
+    ]
+}
