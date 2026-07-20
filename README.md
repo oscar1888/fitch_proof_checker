@@ -9,12 +9,23 @@ It includes support for managing and extending the set of rules, allowing the de
 ## Requirements
 - Python 3.10 or higher
 
-## Installation
-You can install `fitch_proof_checker` by cloning this repository and installing the required dependencies:
-```bash
-git clone https://github.com/oscar1888/fitch_proof_checker.git
-cd fitch_proof_checker
-```
+## Installation and Execution
+
+Open your terminal, navigate to the root directory of the project, and follow these steps:
+
+1. **Install dependencies:**
+   Before running the application, you need to install the required packages via the `requirements.txt` file:
+   
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Run the editor:**
+   Since the project contains a `__main__.py` file in the main directory, you can launch the application simply by executing:
+   
+   ```bash
+   python .
+   ```
 
 ## License
 
