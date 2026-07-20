@@ -209,11 +209,19 @@ def new_arbitary_constant(fpe_main_window):
     const_name, ok = QInputDialog.getText(
         fpe_main_window,
         "New arbitrary constant",
-        "Write the constant name (e.g. \"a\"):"
+        "Write the constant name (must be in the range a-m):"
     )
 
-    if ok and const_name.strip():
+    if ok:
         const_name = const_name.strip()
+
+        if len(const_name) != 1 or not ('a' <= const_name <= 'm'):
+            QMessageBox.warning(
+                fpe_main_window,
+                "Invalid name",
+                f"The constant name must be a letter in the range a-m."
+            )
+            return
 
         if const_name in proof_line.arb_consts_introduced:
             QMessageBox.warning(
