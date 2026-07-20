@@ -15,8 +15,8 @@ def setup(fpe_main_window):
         ("New arbitrary constant", new_arbitary_constant, "Ctrl+t"),
         ("Delete arbitrary constant", delete_arbitrary_constant, "Ctrl+i"),
         ("Edit Goal", edit_goal, "Ctrl+g"),
-        ("Verify Line", verify_line, "Ctrl+l"),
-        ("Verify Proof", verify_proof, "Ctrl+f"),
+        ("Verify Line", None, "Ctrl+l"),
+        ("Verify Proof", None, "Ctrl+f"),
     ]
     for name, fun, shortcut in action_data:
         add_action(fpe_main_window, proof_menu, name, fun, shortcut)

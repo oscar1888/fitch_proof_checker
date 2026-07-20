@@ -260,13 +260,3 @@ def delete_arbitrary_constant(fpe_main_window):
 
 def edit_goal(fpe_main_window):
     fpe_main_window.goal_field.setFocus()
-
-
-def verify_line(fpe_main_window):
-    # TODO: implement this function
-    pass
-
-
-def verify_proof(fpe_main_window):
-    # TODO: implement this function
-    pass

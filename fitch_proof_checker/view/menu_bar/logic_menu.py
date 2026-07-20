@@ -12,8 +12,20 @@ def setup(fpe_main_window):
 
 
 def manage_grammar(fpe_main_window):
-    GrammarManagerDialog(fpe_main_window.grammar_manager, fpe_main_window).exec()
+    fpe_main_window.gmd.tabs.setCurrentIndex(0)
+    fpe_main_window.gmd.list_quantifiers.clearSelection()
+    fpe_main_window.gmd.list_quantifiers.setCurrentRow(-1)
+    fpe_main_window.gmd.list_quantifiers.clearFocus()
+    fpe_main_window.gmd.list_connectives.clearSelection()
+    fpe_main_window.gmd.list_connectives.setCurrentRow(-1)
+    fpe_main_window.gmd.list_connectives.clearFocus()
+    fpe_main_window.gmd.combo_defaults.setCurrentIndex(0)
+    fpe_main_window.gmd.exec()
 
 
 def manage_rule_set(fpe_main_window):
-    LogicManagerDialog(fpe_main_window.logic_manager, fpe_main_window).exec()
+    fpe_main_window.lmd.rule_list.clearSelection()
+    fpe_main_window.lmd.rule_list.setCurrentRow(-1)
+    fpe_main_window.lmd.rule_list.clearFocus()
+    fpe_main_window.lmd.combo_defaults.setCurrentIndex(0)
+    fpe_main_window.lmd.exec()

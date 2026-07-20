@@ -10,14 +10,12 @@ from fitch_proof_checker.view.utils import add_separator
 
 
 class FitchProofChecker(QMainWindow):
-    def __init__(self, model, grammar_manager, logic_manager):
+    def __init__(self):
         super().__init__()
 
-        self.model = model
-
+        self.presenter = None
+        self.current_file_path = None
         self.zoom_level = 0
-        self.grammar_manager = grammar_manager
-        self.logic_manager = logic_manager
         self.edited = False
         self.setWindowTitle("Fitch Proof Checker")
         self.resize(600, 800)
@@ -35,6 +33,21 @@ class FitchProofChecker(QMainWindow):
         add_separator(self)
         setup_proof_layout(self)
         setup_msg_box(self)
+
+    def add_input_proof_presenter(self, presenter):
+        self.presenter = presenter
+        self.btn_check_step.clicked.connect(lambda: presenter.check_step())
+        self.btn_check_proof.clicked.connect(lambda: presenter.check_proof())
+        verify_line_action = next(
+            a for m in self.menuBar().actions() if m.text() == "Proof" for a in m.menu().actions() if
+            a.text() == "Verify Line"
+        )
+        verify_line_action.triggered.connect(presenter.check_step)
+        verify_proof_action = next(
+            a for m in self.menuBar().actions() if m.text() == "Proof" for a in m.menu().actions() if
+            a.text() == "Verify Proof"
+        )
+        verify_proof_action.triggered.connect(presenter.check_proof)
 
     def closeEvent(self, event):
         if can_quit(self):
