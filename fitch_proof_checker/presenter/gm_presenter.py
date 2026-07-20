@@ -57,8 +57,12 @@ class GMPresenter:
             setattr(new_item, '__plugin_path__', file_path)
 
             if item_type == 'connective':
+                if new_item.name in self.model.grammar_manager.connectives:
+                    return False, f"The connective {new_item.name} is already present"
                 self.model.grammar_manager.connectives.append(new_item)
             elif item_type == 'quantifier':
+                if new_item.name in self.model.grammar_manager.quantifiers:
+                    return False, f"The quantifier {new_item.name} is already present"
                 self.model.grammar_manager.quantifiers.append(new_item)
 
             self.model.grammar_manager.formula_parser = self.model.grammar_manager.create_formula_parser()
