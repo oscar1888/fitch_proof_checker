@@ -28,11 +28,9 @@ symbol_map = {
     "<->": ('Co-Implies', "↔"),
     "->": ('Implies', "→"),
     "~": ('Not', "¬"),
-    "\\forall ": ('For all', "∀"),
-    "\\exists ": ('Exists', "∃"),
+    "\\\\forall ": ('For all', "∀"),
+    "\\\\exists ": ('Exists', "∃"),
     "/\\": ('And', "∧"),
     "\\/": ('Or', "∨"),
-    "_|_": ('False', "⊥"),
-    "!=": ('Not Equal', "≠"),
-    "\\mul ": ('Times', "×")
+    "_|_": ('False', "⊥")
 }
