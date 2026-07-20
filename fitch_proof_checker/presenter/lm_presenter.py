@@ -38,6 +38,9 @@ class LMPresenter:
             if not hasattr(new_rule, 'check') or not callable(getattr(new_rule, 'check')):
                 return False, "The 'CustomRule' class must implement a 'check' method."
 
+            if new_rule.name in self.model.logic_manager.rules:
+                return False, f"The rule {new_rule.name} is already present"
+
             self.model.logic_manager.rules.append(new_rule)
             self.populate_list()
             self._update_main_label("Custom Logic")
