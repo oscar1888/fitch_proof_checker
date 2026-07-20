@@ -17,6 +17,8 @@ class FitchProofChecker(QMainWindow):
         self.current_file_path = None
         self.zoom_level = 0
         self.edited = False
+        self.btn_check_step = None
+        self.btn_check_proof = None
         self.setWindowTitle("Fitch Proof Checker")
         self.resize(600, 800)
         style.apply(self)
