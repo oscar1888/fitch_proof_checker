@@ -46,7 +46,7 @@ def get_all_lines(fpe_main_window):
     return [fpe_main_window.proof_layout.itemAt(i).widget() for i in range(fpe_main_window.proof_layout.count())]
 
 
-def _get_premises(fpe_main_window):
+def get_premises(fpe_main_window):
     return [
         line
         for i in range(fpe_main_window.proof_layout.count())
@@ -70,7 +70,7 @@ def update_layout(fpe_main_window):
 
 
 def add_premise(fpe_main_window):
-    premises = _get_premises(fpe_main_window)
+    premises = get_premises(fpe_main_window)
     last_premise = premises[-1] if premises else None
     idx = int(last_premise.line_number_label.text()) if last_premise else 0
     row = ProofLine(fpe_main_window, is_assump=True)
@@ -85,7 +85,7 @@ def add_step_after(fpe_main_window):
         return
     current_line = QApplication.instance().focusWidget().proof_line
     if current_line.is_assump and current_line.depth == 0:
-        last_premise = _get_premises(fpe_main_window)[-1]
+        last_premise = get_premises(fpe_main_window)[-1]
         idx = int(last_premise.line_number_label.text())
     else:
         idx = int(current_line.line_number_label.text())
@@ -101,7 +101,7 @@ def add_step_before(fpe_main_window):
         return
     current_line = QApplication.instance().focusWidget().proof_line
     if current_line.is_assump and current_line.depth == 0:
-        last_premise = _get_premises(fpe_main_window)[-1]
+        last_premise = get_premises(fpe_main_window)[-1]
         idx = int(last_premise.line_number_label.text())
     else:
         idx = int(current_line.line_number_label.text()) - 1
@@ -116,7 +116,7 @@ def add_step_before(fpe_main_window):
     update_layout(fpe_main_window)
 
 
-def _find_final_subproof_idx(fpe_main_window, current_line):
+def find_final_subproof_idx(fpe_main_window, current_line):
     pos = int(current_line.line_number_label.text()) - 1
     final_idx = pos
     for line in [fpe_main_window.proof_layout.itemAt(i).widget() for i in
@@ -130,12 +130,12 @@ def delete_step(fpe_main_window):
     if not isinstance(QApplication.instance().focusWidget(), FPELineEdit):
         return
     current_line = QApplication.instance().focusWidget().proof_line
-    premises = _get_premises(fpe_main_window)
+    premises = get_premises(fpe_main_window)
     if len(premises) == 1 and current_line.is_assump and current_line.depth == 0: return
 
     if current_line.is_assump and current_line.depth > 0:
         pos = int(current_line.line_number_label.text()) - 1
-        final_idx_to_del = _find_final_subproof_idx(fpe_main_window, current_line)
+        final_idx_to_del = find_final_subproof_idx(fpe_main_window, current_line)
         for i in range(final_idx_to_del, pos-1, -1):
             line = fpe_main_window.proof_layout.itemAt(i).widget()
             fpe_main_window.proof_layout.removeWidget(line)
@@ -160,7 +160,7 @@ def new_subproof(fpe_main_window):
     current_line = QApplication.instance().focusWidget().proof_line
 
     if current_line.is_assump and current_line.depth == 0:
-        glob_prems = _get_premises(fpe_main_window)
+        glob_prems = get_premises(fpe_main_window)
         idx = int(glob_prems[-1].line_number_label.text())
     elif not current_line.is_assump and not current_line.formula_field.text():
         idx = int(current_line.line_number_label.text()) - 1
@@ -181,7 +181,7 @@ def end_subproof(fpe_main_window):
         return
     current_line = QApplication.instance().focusWidget().proof_line
     if current_line.depth == 0: return
-    last_idx = _find_final_subproof_idx(fpe_main_window, current_line)
+    last_idx = find_final_subproof_idx(fpe_main_window, current_line)
 
     if current_line.is_assump or current_line.formula_field.text():
         row = ProofLine(fpe_main_window, depth=current_line.depth - 1)

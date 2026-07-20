@@ -41,7 +41,7 @@ class ProofLine(QWidget):
             line_layout.addWidget(self.status_dot)
 
     def paintEvent(self, event):
-        from fitch_proof_checker.view.proof_layout.proof_layout import _get_premises
+        from fitch_proof_checker.view.proof_layout.proof_layout import get_premises
 
         painter = QPainter(self)
         painter.setPen(QPen(Qt.GlobalColor.black, 2, cap=Qt.PenCapStyle.SquareCap))
@@ -53,7 +53,7 @@ class ProofLine(QWidget):
             last_x = start_x + (i * INTERBAR_SPACE)
             painter.drawLine(last_x, 15 if self.is_assump and i > 0 and i == self.depth else 0, last_x, self.height())
 
-        glob_prem = _get_premises(self.fpe_main_window)
+        glob_prem = get_premises(self.fpe_main_window)
 
         if self.is_assump and (self == glob_prem[-1] or int(self.line_number_label.text()) > len(glob_prem)):
             y_base = self.formula_field.geometry().bottom() + 5
