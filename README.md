@@ -6,6 +6,10 @@ The system handles Fitch-style proofs, representing derivations through structur
 
 It includes support for managing and extending the set of rules, allowing the definition of sound and complete calculi for different logical systems.
 
+## Screenshot
+
+![Fitch Proof Checker Preview](image.png)
+
 ## Requirements
 - Python 3.10 or higher
 
