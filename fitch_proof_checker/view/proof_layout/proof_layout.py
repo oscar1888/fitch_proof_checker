@@ -215,11 +215,11 @@ def new_arbitary_constant(fpe_main_window):
     if ok:
         const_name = const_name.strip()
 
-        if len(const_name) != 1 or not ('a' <= const_name <= 'm'):
+        if not const_name or not all('a' <= c <= 'm' for c in const_name):
             QMessageBox.warning(
                 fpe_main_window,
                 "Invalid name",
-                f"The constant name must be a letter in the range a-m."
+                "The constant name must consist exclusively of one or more letters in the range a-m."
             )
             return
 
