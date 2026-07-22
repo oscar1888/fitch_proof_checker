@@ -11,6 +11,7 @@ class Connective(Formula):
     name: ClassVar[str]
     symbol: ClassVar[str]
     arity: ClassVar[int]
+    is_custom: ClassVar[bool] = True
 
     def __init__(self, *args: Formula):
         if len(args) != self.arity:
@@ -72,36 +73,42 @@ class Connective(Formula):
 
 
 class Not(Connective):
+    is_custom = False
     name = "Not"
     symbol = "¬"
     arity = 1
 
 
 class And(Connective):
+    is_custom = False
     name = "And"
     symbol = "∧"
     arity = 2
 
 
 class Or(Connective):
+    is_custom = False
     name = "Or"
     symbol = "∨"
     arity = 2
 
 
 class Implies(Connective):
+    is_custom = False
     name = "Implies"
     symbol = "→"
     arity = 2
 
 
 class CoImplies(Connective):
+    is_custom = False
     name = "CoImplies"
     symbol = "↔"
     arity = 2
 
 
 class Falsum(Connective):
+    is_custom = False
     name = "False"
     symbol = "⊥"
     arity = 0

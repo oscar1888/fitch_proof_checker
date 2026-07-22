@@ -4,7 +4,7 @@ from fitch_proof_checker.model.rule.rule import Rule
 
 
 class CustomRule(Rule):
-    name = "XorElim"
+    name = "\\XorElim"
 
     @staticmethod
     def check(ipp, actual_premises, actual_conclusion) -> bool:

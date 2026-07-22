@@ -17,14 +17,14 @@
         },
         {
             "formula": "\\XOR(A, B)",
-            "justification": "XorIntro 1, 2",
+            "justification": "\\XorIntro 1, 2",
             "depth": 0,
             "is_assump": false,
             "arb_consts_introduced": []
         },
         {
             "formula": "\u00acB",
-            "justification": "XorElim 3, 1",
+            "justification": "\\XorElim 3, 1",
             "depth": 0,
             "is_assump": false,
             "arb_consts_introduced": []

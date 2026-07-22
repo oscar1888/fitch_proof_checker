@@ -12,6 +12,7 @@ class Quantifier(Formula):
 
     name: ClassVar[str]
     symbol: ClassVar[str]
+    is_custom: ClassVar[bool] = True
 
     def free_vars(self) -> set:
         return self.subformula.free_vars() - {self.variable.name}
@@ -65,10 +66,12 @@ class Quantifier(Formula):
 
 
 class ForAll(Quantifier):
+    is_custom = False
     name = "For all"
     symbol = "∀"
 
 
 class Exists(Quantifier):
+    is_custom = False
     name = "Exists"
     symbol = "∃"

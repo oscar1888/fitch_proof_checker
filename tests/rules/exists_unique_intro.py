@@ -6,7 +6,7 @@ from fitch_proof_checker.model.rule.rule import Rule
 
 
 class CustomRule(Rule):
-    name = "∃!Intro"
+    name = "\\∃!Intro"
 
     @staticmethod
     def check(ipp, actual_premises, actual_conclusion) -> bool:
