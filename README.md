@@ -1,4 +1,4 @@
-# Fitch proof checker
+# Fitch Proof Checker
 
 Master’s thesis project implementing an environment for developing and verifying proofs in natural deduction calculi.
 
