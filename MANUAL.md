@@ -236,7 +236,7 @@ These base classes are extended by specific logical elements. Below are their su
 *   `constants` (list of str): Arbitrary constants introduced in this subproof's assumption.
 *   `lines_range` (tuple of int): The starting and ending line numbers `(start, end)`.
 *   `assumption` (Formula): The premise formula of the subproof.
-*   `lines` (list of Formula): The derived lines within the subproof.
+*   `lines` (list of Formula or Subproof): The derived lines within the subproof.
 
 ## Examples
 

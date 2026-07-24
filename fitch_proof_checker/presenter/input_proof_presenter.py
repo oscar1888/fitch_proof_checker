@@ -100,17 +100,67 @@ class InputProofPresenter:
         if start_line.depth != current_line.depth + 1:
             raise ValueError(f"Subproof {ref[0]}-{ref[1]} is not accessible from this depth.")
 
-        try:
-            assump_ast = formula_parser(start_line.formula_field.text().strip())
-            body_asts = [
-                formula_parser(all_lines[i].formula_field.text().strip())
-                for i in range(start_idx + 1, end_idx + 1)
-            ]
-        except LarkError:
-            raise ValueError(f"Syntax error inside the formula in subproof {ref[0]}-{ref[1]}.")
+        stack = []
 
-        lines_range = (start_idx + 1, end_idx + 1)
-        cited_items.append(Subproof(start_line.arb_consts_introduced, lines_range, assump_ast, body_asts))
+        for i in range(start_idx, end_idx + 1):
+            line = all_lines[i]
+
+            while len(stack) > 1:
+                top_depth = stack[-1]['start_line'].depth
+                if top_depth > line.depth or (line.is_assump and top_depth == line.depth):
+                    popped = stack.pop()
+                    popped_range = (popped['start_idx'] + 1, i)
+                    subproof_obj = Subproof(
+                        popped['start_line'].arb_consts_introduced,
+                        popped_range,
+                        popped['assump_ast'],
+                        popped['body_asts']
+                    )
+                    stack[-1]['body_asts'].append(subproof_obj)
+                else:
+                    break
+
+            try:
+                ast = formula_parser(line.formula_field.text().strip())
+            except LarkError:
+                raise ValueError(f"Syntax error inside the formula at line {i + 1}.")
+
+            if line.is_assump:
+                stack.append({
+                    'start_idx': i,
+                    'start_line': line,
+                    'assump_ast': ast,
+                    'body_asts': []
+                })
+            else:
+                if not stack:
+                    raise ValueError(f"Line {i + 1} is not within any subproof context.")
+                stack[-1]['body_asts'].append(ast)
+
+        while len(stack) > 1:
+            popped = stack.pop()
+            popped_range = (popped['start_idx'] + 1, end_idx + 1)
+            subproof_obj = Subproof(
+                popped['start_line'].arb_consts_introduced,
+                popped_range,
+                popped['assump_ast'],
+                popped['body_asts']
+            )
+            stack[-1]['body_asts'].append(subproof_obj)
+
+        if not stack:
+            raise ValueError(f"Error parsing subproof {ref[0]}-{ref[1]}: empty stack.")
+
+        root_data = stack.pop()
+        lines_range = (root_data['start_idx'] + 1, end_idx + 1)
+        root_subproof = Subproof(
+            root_data['start_line'].arb_consts_introduced,
+            lines_range,
+            root_data['assump_ast'],
+            root_data['body_asts']
+        )
+
+        cited_items.append(root_subproof)
 
     def _parse_cited_lines(self, current_line, parsed_just):
         if not parsed_just['references']: return []

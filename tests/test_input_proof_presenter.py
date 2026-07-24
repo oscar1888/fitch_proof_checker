@@ -186,7 +186,7 @@ def test_parse_cited_subproof_lark_error(presenter, mocker):
     mocker.patch('fitch_proof_checker.presenter.input_proof_presenter.find_final_subproof_idx', return_value=1)
     all_lines = [DummyLine("A", depth=1, is_assump=True), DummyLine("B", depth=1)]
     parser = MagicMock(side_effect=LarkError("err"))
-    with pytest.raises(ValueError, match="Syntax error inside the formula in subproof 1-2."):
+    with pytest.raises(ValueError, match="Syntax error inside the formula at line 1."):
         InputProofPresenter._parse_cited_subproof(presenter, (1, 2), all_lines, 2, DummyLine(depth=0), parser, [])
 
 
